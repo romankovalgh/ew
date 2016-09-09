@@ -5,6 +5,7 @@ class FTXT{
   public $the_file;            //имя файла
   //public $n;            
   public $fcontents;            //содержимое
+  public $fcontentstxt;            //содержимое всего файла
   public $fnum_lines;            //колличество строк
   private $i=0;
   
@@ -27,7 +28,14 @@ class FTXT{
 	return $this->fcontents[0];					//возвращение первой строки
   }
   
-  function read_next(){			//ф-ция по очереди возвращает строки файла
+    function readtxt0(){								
+	$this->i=0;									
+	$fcontentstxt=file_get_contents($this->the_file=$text);
+	
+	return $this->fcontents[0];					//возвращение первой строки
+  }
+  
+  function readtxt_next(){			//ф-ция по очереди возвращает строки файла
 	  ++$this->i; 
 	  if ($this->i>$this->fnum_lines-1) {echo "Больше в файле ничего нет!";}
 	  else return $this->fcontents[$this->i];
@@ -38,7 +46,8 @@ class FTXT{
   }*/
 
   
-  function write(...$d){				//функция записывает данный в файл
+  function writetxt(...$d){				//функция записывает данный в файл
+	//$str=implode("\r\n",$d);
 	$difference=array_diff_key($this->fcontents, $d);//проверяет разницу между
 	if (count($difference)<>0) $d=array_merge($d, $difference);//переданными аргументами 
 		//и начальным значением файла. Если есть разница, то оставляет неизменными 
@@ -48,15 +57,8 @@ class FTXT{
 	
   }
   
-   function w3rite(...$d){//удалить эту функцию
-	$this->i=0;
-	$str=implode("\r\n",$d);
-	file_put_contents ( $this->the_file , $str , LOCK_EX  );
-	$difference=array_diff_key($this->fcontents, $d);
-  }
-  
-  
-  function rewrite(...$d){//функция перезаписи. Стирает предыдущую запись в файл
+     
+  function rewritetxt(...$d){//функция перезаписи. Стирает предыдущую запись в файл
 	$this->i=0;//и записывает новые записи
 	$str=implode("\r\n",$d);
 	file_put_contents ( $this->the_file , $str , LOCK_EX  );
