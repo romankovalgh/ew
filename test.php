@@ -65,8 +65,7 @@ class FTXT{
 }
   
 $obj=new FTXT('1.txt');       //
-//$obj->set_file('1.txt');    //
-//echo $obj->the_file.'<br>'; //
+
   
 $n1=$obj->read0();
 echo $n1.'<br>';    //
@@ -87,9 +86,9 @@ $n1=(int)$n1;
 ++$n1;
 
 $obj->write($n1,$n2,$n3);  
+++$n2;++$n1;
 $obj->write($n1,$n2);  
-//$obj->write($n2);  
-//$obj->write($n3);  
+
   
 ?>
 
