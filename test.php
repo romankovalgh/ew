@@ -30,12 +30,18 @@ class FTXT{
   
     function readtxt0(){								
 	$this->i=0;									
-	$fcontentstxt=file_get_contents($this->the_file=$text);
-	
-	return $this->fcontents[0];					//возвращение первой строки
+	$this->fcontentstxt=file_get_contents($this->the_file);
+	$str=stristr ( $this->fcontentstxt , "\r\n", true );
+	return $str;					//возвращение первой строки
   }
   
   function readtxt_next(){			//ф-ция по очереди возвращает строки файла
+	  ++$this->i; 
+	  if ($this->i>$this->fnum_lines-1) {echo "Больше в файле ничего нет!";}
+	  else return $this->fcontents[$this->i];
+  }
+  
+  function read_next(){			//ф-ция по очереди возвращает строки файла
 	  ++$this->i; 
 	  if ($this->i>$this->fnum_lines-1) {echo "Больше в файле ничего нет!";}
 	  else return $this->fcontents[$this->i];
@@ -68,9 +74,10 @@ class FTXT{
   
 $obj=new FTXT('1.txt');       //
 
-  
+  $str=$obj->readtxt0();
+  echo $str.'<br>';
 $n1=$obj->read0();
-echo $n1.'<br>';    //
+echo '<br><br>'.$n1.'<br>';    //
 
 $n2=$obj->read_next();
 echo $n2.'<br>';
@@ -87,9 +94,11 @@ $n2=(int)$n2;
 $n1=(int)$n1;
 ++$n1;
 
-$obj->write($n1,$n2,$n3);  
+echo '<br>'.$n1.$n2.$n3.'<br>';
+
+/*$obj->write($n1,$n2,$n3);  
 ++$n2;++$n1;
-$obj->write($n1,$n2);  
+$obj->write($n1,$n2);  */
 
   
 ?>
