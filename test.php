@@ -1,33 +1,33 @@
 ﻿<?php
 
-class FTXT{               //Объявили класс 
+class FTXT{ 
   
-  public $the_file;            //Объявили, но неинициализировали свойство класса
-  //public $n;            //Объявили, но неинициализировали свойство класса
-  public $fcontents;            //Объявили, но неинициализировали свойство класса
-  public $fnum_lines;            //Объявили, но неинициализировали свойство класса
+  public $the_file;            //имя файла
+  //public $n;            
+  public $fcontents;            //содержимое
+  public $fnum_lines;            //колличество строк
   private $i=0;
   
-  function __construct($text){   //Создаем метод класса, который устанавливает 
-                              //значение его свойства my_name 
-    $this->the_file=$text;     //Ключевое слово $this ссылается на сам объект 
+  function __construct($text){   //конструктор, который устанавливает 
+                              //значение его свойства the_file
+    $this->the_file=$text;     
   } 
   
   function set_file($text){   //Создаем метод класса, который устанавливает 
-                              //значение его свойства my_name 
-    $this->the_file=$text;     //Ключевое слово $this ссылается на сам объект 
+                              //значение его свойства the_file
+    $this->the_file=$text;     
   } 
   
-  function read0(){
-	$this->i=0;
-	$f=fopen($this->the_file,"r+");
-	$this->fcontents=file($this->the_file);
-	$this->fnum_lines=count($this->fcontents);
-	fclose($f);
-	return $this->fcontents[0];
+  function read0(){								
+	$this->i=0;									
+	$f=fopen($this->the_file,"r+");				//открытие файла
+	$this->fcontents=file($this->the_file);		//чтение из него строк в массив
+	$this->fnum_lines=count($this->fcontents);	
+	fclose($f);									//закрытие файла
+	return $this->fcontents[0];					//возвращение первой строки
   }
   
-  function read_next(){
+  function read_next(){			//ф-ция по очереди возвращает строки файла
 	  ++$this->i; 
 	  if ($this->i>$this->fnum_lines-1) {echo "Больше в файле ничего нет!";}
 	  else return $this->fcontents[$this->i];
@@ -38,17 +38,17 @@ class FTXT{               //Объявили класс
   }*/
 
   
-  function write(...$d){
-	$difference=array_diff_key($this->fcontents, $d);
-	if (count($difference)<>0) $d=array_merge($d, $difference); 
-		
-	$this->i=0;
+  function write(...$d){				//функция записывает данный в файл
+	$difference=array_diff_key($this->fcontents, $d);//проверяет разницу между
+	if (count($difference)<>0) $d=array_merge($d, $difference);//переданными аргументами 
+		//и начальным значением файла. Если есть разница, то оставляет неизменными 
+	$this->i=0;//те значения, что не были изменены. 
 	$str=implode("\r\n",$d);
 	file_put_contents ( $this->the_file , $str , LOCK_EX  );
 	
   }
   
-   function w3rite(...$d){
+   function w3rite(...$d){//удалить эту функцию
 	$this->i=0;
 	$str=implode("\r\n",$d);
 	file_put_contents ( $this->the_file , $str , LOCK_EX  );
@@ -56,25 +56,25 @@ class FTXT{               //Объявили класс
   }
   
   
-  function rewrite(...$d){
-	$this->i=0;
+  function rewrite(...$d){//функция перезаписи. Стирает предыдущую запись в файл
+	$this->i=0;//и записывает новые записи
 	$str=implode("\r\n",$d);
 	file_put_contents ( $this->the_file , $str , LOCK_EX  );
   }
   
 }
   
-$person=new FTXT('1.txt');       //Создали экземпляр класса, т.е. объект
-//$person->set_file('1.txt');    //
-//echo $person->the_file.'<br>'; //
+$obj=new FTXT('1.txt');       //
+//$obj->set_file('1.txt');    //
+//echo $obj->the_file.'<br>'; //
   
-$n1=$person->read0();
+$n1=$obj->read0();
 echo $n1.'<br>';    //
 
-$n2=$person->read_next();
+$n2=$obj->read_next();
 echo $n2.'<br>';
 
-$n3=$person->read_next();
+$n3=$obj->read_next();
 echo $n3.'<br>';
 
 $n3=(int)$n3;
@@ -86,10 +86,10 @@ $n2=(int)$n2;
 $n1=(int)$n1;
 ++$n1;
 
-$person->write($n1,$n2,$n3);  
-$person->write($n1,$n2);  
-//$person->write($n2);  
-//$person->write($n3);  
+$obj->write($n1,$n2,$n3);  
+$obj->write($n1,$n2);  
+//$obj->write($n2);  
+//$obj->write($n3);  
   
 ?>
 
