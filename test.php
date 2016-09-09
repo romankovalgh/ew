@@ -63,7 +63,13 @@ class FTXT{
 	
   }
   
-     
+   function writetxt_all(...$d){//функция записывает все! данные в файл
+	$this->i=0;
+	$str=implode("\r\n",$d);
+	file_put_contents ( $this->the_file , $str , LOCK_EX  );
+  } 
+
+	
   function rewritetxt(...$d){//функция перезаписи. Стирает предыдущую запись в файл
 	$this->i=0;//и записывает новые записи
 	$str=implode("\r\n",$d);
@@ -96,6 +102,7 @@ $n1=(int)$n1;
 
 echo '<br>'.$n1.$n2.$n3.'<br>';
 
+$obj->writetxt_all($n1,$n2,$n3);  
 /*$obj->write($n1,$n2,$n3);  
 ++$n2;++$n1;
 $obj->write($n1,$n2);  */
