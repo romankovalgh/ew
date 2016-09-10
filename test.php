@@ -8,6 +8,7 @@ class FTXT{
   public $fcontentstxt;            //содержимое всего файла
   public $fnum_lines;            //колличество строк
   private $i=0;
+  public $row; 
   
   function __construct($text){   //конструктор, который устанавливает 
                               //значение его свойства the_file
@@ -31,14 +32,17 @@ class FTXT{
     function readtxt0(){								
 	$this->i=0;									
 	$this->fcontentstxt=file_get_contents($this->the_file);
-	$str=stristr ( $this->fcontentstxt , "\r\n", true );
+	$str=stristr ( $this->fcontentstxt , "\r\n", true);
+	$this->row=stristr ( $this->fcontentstxt , "\r\n");
 	return $str;					//возвращение первой строки
   }
   
   function readtxt_next(){			//ф-ция по очереди возвращает строки файла
 	  ++$this->i; 
+	  $str=stristr ( $this->row , "\r\n", true);
+	  $this->row=stristr ( $this->row , "\r\n");
 	  if ($this->i>$this->fnum_lines-1) {echo "Больше в файле ничего нет!";}
-	  else return $this->fcontents[$this->i];
+	  else return $str;
   }
   
   function read_next(){			//ф-ция по очереди возвращает строки файла
@@ -47,9 +51,6 @@ class FTXT{
 	  else return $this->fcontents[$this->i];
   }
   
-/*  function plusplus(){
-	 ++$this->n; 
-  }*/
 
   
   function writetxt(...$d){				//функция записывает данный в файл
@@ -80,15 +81,15 @@ class FTXT{
   
 $obj=new FTXT('1.txt');       //
 
-  $str=$obj->readtxt0();
-  echo $str.'<br>';
-$n1=$obj->read0();
-echo '<br><br>'.$n1.'<br>';    //
+  $n1=$obj->readtxt0();
+  echo $n1.'<br>';
+/*$n1=$obj->read0();
+echo '<br><br>'.$n1.'<br>';    */
 
-$n2=$obj->read_next();
+$n2=$obj->readtxt_next();
 echo $n2.'<br>';
 
-$n3=$obj->read_next();
+$n3=$obj->readtxt_next();
 echo $n3.'<br>';
 
 $n3=(int)$n3;
