@@ -37,13 +37,13 @@ class FTXT{
 	return $str;					//возвращение первой строки
   }
   
-  function readtxt_next(){			//ф-ция по очереди возвращает строки файла
+/*  function readtxt_next(){			//ф-ция по очереди возвращает строки файла
 	  ++$this->i; 
 	  $str=stristr ( $this->row , "\r\n", true);
 	  $this->row=stristr ( $this->row , "\r\n");
 	  if ($this->i>$this->fnum_lines-1) {echo "Больше в файле ничего нет!";}
 	  else return $str;
-  }
+  }*/
   
   function read_next(){			//ф-ция по очереди возвращает строки файла
 	  ++$this->i; 
@@ -86,10 +86,10 @@ $obj=new FTXT('1.txt');       //
 /*$n1=$obj->read0();
 echo '<br><br>'.$n1.'<br>';    */
 
-$n2=$obj->readtxt_next();
+$n2=$obj->read_next();
 echo $n2.'<br>';
 
-$n3=$obj->readtxt_next();
+$n3=$obj->read_next();
 echo $n3.'<br>';
 
 $n3=(int)$n3;
