@@ -19,7 +19,7 @@ openWriteCloseF("n.txt", ++$N);
 $beta = (int) $_COOKIE['beta'];
 $stArticle = $_COOKIE['stq']; 
 
-$is_here = checkEnteringАrticle( trim($stArticle), $reply);//чи входить наша відповідь
+$is_here = checkEnteringАrticle( trim($stArticle), $reply); //чи входить наша відповідь
 // в рядок із набору слов статті
 
 displayingResult($is_here);
