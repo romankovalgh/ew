@@ -58,7 +58,7 @@ array_unshift($words, $eng, $tr);
 foreach($words as $v){
 	echo $v."HHH<br>";
 } 
-/*
+
 $gamma=rand(0,7);
 
 $q=[$e[$beta],$t[$beta],$u[$beta],$u2[$beta],$u3[$beta],$r[$beta],$r2[$beta],$r3[$beta]];
@@ -67,7 +67,7 @@ $stq=implode('<br>',$qu);//Объединяет элементы массива 
 
 setcookie("stq", $stq, time() + 3600*24); 
 
-$qst=$q[$gamma]; echo $qst."&emsp;";*/
+$qst=$q[$gamma]; echo $qst."&emsp;";
 
 ?>
 <p>Введіть це слово:&emsp;</p>
