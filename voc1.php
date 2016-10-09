@@ -21,10 +21,12 @@ $q=[];//це темповський масив для запитання
 $qst='';//це темповська змінна для запитання
 //КІНЕЦЬ БЛОКУ ВИЗНАЧЕННЯ МАСИВІВ, ЗМІННИХ І КОНСТАНТ
 
-//$beta="випадкове значення";
-$beta=rand(0,$knm-1); setcookie("beta", $beta, time() + 3600*24); 
 
-$article=$voc[$beta];
+//$randSelectQuestion="випадкове значення";
+$randSelectQuestion=rand(0,$knm-1);
+setcookie("randSelectQuestion", $randSelectQuestion, time() + 3600*24); 
+
+$article=$voc[$randSelectQuestion];
 
 $eng=stristr($article, '[', true);
 $eng=rtrim($eng);
@@ -57,24 +59,25 @@ echo "останній елемент масиву: ".$words[count($words)-1]."<
 array_unshift($words, $eng, $tr);
 foreach($words as $v){
 	echo $v."HHH<br>";
-} 
+}  
 
 $gamma=rand(0,7);
 
-$q=[$e[$beta],$t[$beta],$u[$beta],$u2[$beta],$u3[$beta],$r[$beta],$r2[$beta],$r3[$beta]];
+$q=[$e[$randSelectQuestion],$t[$randSelectQuestion],$u[$randSelectQuestion],$u2[$randSelectQuestion],$u3[$randSelectQuestion],$r[$randSelectQuestion],$r2[$randSelectQuestion],$r3[$randSelectQuestion]];
 $qu=array_unique($q);
-$stq=implode('<br>',$qu);//Объединяет элементы массива с помощью строки '<br>'
+$articleToString=implode('<br>',$qu);//Объединяет элементы массива с помощью строки '<br>'
 
-setcookie("stq", $stq, time() + 3600*24); 
+
+setcookie("articleToString", $articleToString, time() + 3600*24); 
 
 $qst=$q[$gamma]; echo $qst."&emsp;";
 
 ?>
 <p>Введіть це слово:&emsp;</p>
-<p><input type="text" name="wrd" /></p>
+<p><input type="text" name="question" /></p>
  
 <p>Перекладіть:&emsp;</p>
-<p><input type="text" name="rpl" /></p>
+<p><input type="text" name="answer" /></p>
  
  <p><input type="submit" /></p>
 </form>
