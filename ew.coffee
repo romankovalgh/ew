@@ -1,5 +1,4 @@
-﻿arrayWordsDictionary = [
-"boolean [bʊˈlɪən] – логический тип."
+﻿arrayWordsDictionary = ["boolean [bʊˈlɪən] – логический тип."
 "integer [ˈɪntɪdʒə] – целое число."
 "float [fləʊt] – плавать, число с плавающей точкой."
 "string [strɪŋ] – струна, строка."
@@ -18,6 +17,15 @@
 "unset [ʌnˈsɛt] – сброс."
 ]
 
+firstWordDictionary = []
+i = 0
+for element in arrayWordsDictionary
+  positionOpeningBracket = element.indexOf '['
+  firstWordDictionary[i++] = element.slice 0, positionOpeningBracket
+  console.log firstWordDictionary[--i] + 'FFFF'
+  
+
+# console.log element for element in arrayWordsDictionary
 
 
 
